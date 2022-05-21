@@ -10,9 +10,9 @@ let pokemonList = [
   ];
  
 for (let i=0; i<pokemonList.length; i++){
-  document.write(pokemonList[i].name + ' ' + 'height is' + pokemonList.height + '!';
+  document.write(pokemonList[i].name + ' ' + 'height is' + pokemonList[i].height + ' m!');
         //conditional         
   if(pokemonList[i].height >= 1.0 m){
-    document.write (' - Wow, that\'s big!' + '<br>');
+    document.write ('   - Wow, that\'s big!' + '<br>');
   }
 }
