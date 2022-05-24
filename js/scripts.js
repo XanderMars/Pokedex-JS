@@ -16,6 +16,17 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
+  
+  function size(pokemon){
+      document.write(pokemon.name + ' ' + 'height is ' + pokemon.height + ' m! ');
+        //conditional         
+  if(pokemon.height >= 1.0){
+    document.write ('   - Wow, that\'s big!' + '<br>');
+  }
+  else if (pokemon.height <= 1.0){
+      document.write('<br>');
+  }
+}
 
   return {
     add: add,
@@ -28,6 +39,6 @@ pokemonRepository.add({ name: "Venusaur", height: '2.0', type: ['Grass', 'Poison
 console.log(pokemonRepository.getAll());
   
 pokemonRepository.getAll().forEach(function (pokemon) {
-    
+  pokemonRepository.size(pokemon)
 });
-
+    
