@@ -15,7 +15,8 @@ let pokemonRepository = (function () {
 
   function getAll() {
     return pokemonList;
-  }
+    }
+  }  
   
   function size(pokemon){
       document.write(pokemon.name + ' ' + 'height is ' + pokemon.height + ' m! ');
@@ -23,14 +24,15 @@ let pokemonRepository = (function () {
   if(pokemon.height >= 1.0){
     document.write ('   - Wow, that\'s big!' + '<br>');
   }
-  else if (pokemon.height <= 1.0){
+  else {
       document.write('<br>');
   }
 }
 
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    size: size
   };
     
 })();
