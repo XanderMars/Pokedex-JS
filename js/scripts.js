@@ -27,7 +27,7 @@ let pokemonRepository = (function () {
   else {
       document.write('<br>');
   }
-}
+};
 
   return {
     add: add,
