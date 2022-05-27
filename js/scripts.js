@@ -21,13 +21,13 @@ let pokemonRepository = (function () {
   function size(pokemon){
       document.write(pokemon.name + ' ' + 'height is ' + pokemon.height + ' m! ');
         //conditional         
-  if(pokemon.height >= 1.0){
-    document.write ('   - Wow, that\'s big!' + '<br>');
+    if(pokemon.height >= 1.0){
+      document.write ('   - Wow, that\'s big!' + '<br>');
+    }
+    else {
+        document.write('<br>');
+    }
   }
-  else {
-      document.write('<br>');
-  }
-}
 
   return {
     add: add,
