@@ -43,4 +43,3 @@ console.log(pokemonRepository.getAll());
 pokemonRepository.getAll().forEach(function (pokemon) {
   pokemonRepository.size(pokemon)
 });
-    
