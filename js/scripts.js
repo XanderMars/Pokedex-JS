@@ -36,11 +36,21 @@ let pokemonRepository = (function () {
         document.write('<br>');
     }
   }
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector('pokemon-list');
+    let listpokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = "pokemon.name";
+    button.classList.add('button-class');
+    listpokemon.appendChild(button);
+    pokemonlist.appendChild(listpokemon);
+  }
 
   return {
     add: add,
     getAll: getAll,
-    size: size
+    size: size,
+    addListItem: addListItem
   };
     
 })();
@@ -49,11 +59,5 @@ pokemonRepository.add({ name: "Venusaur", height: '2.0', type: ['Grass', 'Poison
 console.log(pokemonRepository.getAll());
   
 pokemonRepository.getAll().forEach(function (pokemon) {
-  let pokemonList = document.querySelector('pokemon-list');
-  let listpokemon = document.createElement('li');
-  let button = document.createElement('button');
-  button.innerText = "pokemon.name";
-  button.classList.add('button-class');
-  listpokemon.appendChild(button);
-  pokemonlist.appendChild(listpokemon);
+ pokemonRepository.addListItem(pokemon);
 });
