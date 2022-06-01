@@ -27,12 +27,13 @@ let pokemonRepository = (function () {
     }
   
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.pokemon-list');
-    let listpokemon = document.createElement('li');
-    let button = document.createElement('button');
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
     button.innerText = pokemon.name;
-    button.classList.add('button-class');
+    button.classList.add("button-class");
     listpokemon.appendChild(button);
+    
     pokemonlist.appendChild(listpokemon);
     button.addEventListener('click', function (event) {
       showDetails(pokemon);
@@ -52,6 +53,7 @@ let pokemonRepository = (function () {
 })();
 
 pokemonRepository.add({ name: "Venusaur", height: '2.0', type: ['Grass', 'Poison'] });
+
 console.log(pokemonRepository.getAll());
   
 pokemonRepository.getAll().forEach(function (pokemon) {
