@@ -11,11 +11,11 @@ let pokemonRepository = (function () {
   ];
 
   function add(pokemon) {
-    if {
+    if (
       typeof pokemon === "object" &&
       "name" in pokemon &&
       "height" in pokemon &&
-      "types" in pokemon } {
+      "types" in pokemon ) {
    repository.push(pokemon);
     } else {
       console.log("Invalid Pokemon Entry");
