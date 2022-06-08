@@ -80,6 +80,37 @@ function showModal(pokemon) {
   if (target === modalContainer) {
     hideModal();
   }
+
+    //Assigning modal variables
+    let modalTitle = $(".modal-title");
+    let modalBody = $(".modal-body");
+
+    // Clear all existing modal content
+    modalTitle.empty();
+    modalBody.empty();
+
+    // Creating pokemon elements
+    let pokemonName = $(`<h1>${pokemon.name}</h1>`);
+    let pokemonImage = $(
+      `<img class="modal-img mx-auto" src="${pokemon.svgUrl}" alt="Image of ${pokemon.name}">`
+    );
+
+    let pokemonHeight = $(
+      `<p class="ml-4 mt-3 mb-0">Height: ${pokemon.height}</p>`
+    );
+    let pokemonWeight = $(`<p class="ml-4 mb-0">Weight: ${pokemon.weight}</p>`);
+    let pokemonTypes = $(
+      `<p class="ml-4">Types: ${pokemon.types.join(", ")}</p>`
+    );
+
+    // appending pokemon elements to the modal div
+    modalTitle.append(pokemonName);
+    modalBody.append(pokemonImage);
+    modalBody.append(pokemonHeight);
+    modalBody.append(pokemonWeight);
+    modalBody.append(pokemonTypes);
+  }
+
 });
 
 function hideModal(pokemon) {
