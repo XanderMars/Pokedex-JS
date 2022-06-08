@@ -4,10 +4,10 @@ let pokemonRepository = (function () {
 
 //Function to add pokemon and validate the typeof
   function add(pokemon) {
-    if (
+    if {
       typeof pokemon === "object" &&
       "name" in pokemon
-      {
+      }
    pokemonList.push(pokemon);
     } else {
       console.log("Invalid Pokemon Entry");
