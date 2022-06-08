@@ -114,9 +114,7 @@ function showModal(pokemon) {
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypes);
-  }
-
-});
+  })
 
 function hideModal(pokemon) {
   let modalContainer = document.querySelector('#modal-container');
@@ -133,7 +131,6 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
     hideModal();  
   }
-});
 
   return {
     add: add,
