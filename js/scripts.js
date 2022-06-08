@@ -67,6 +67,38 @@ function showDetails(pokemon) {
     showModal(pokemon);
   });
 }
+
+function showModal(pokemon) {
+  let modalContainer = document.querySelector('#modal-container');
+  modalContainer.classlist.add('is-visbile');
+  let closeModal = document.querySelector('modal-close');
+  closeModal.addEventListener('click', hideModal);
+  modalContainer.addEventListener('click', (e) => {
+  // Since this is also triggered when clicking INSIDE the modal
+  // We only want to close if the user clicks directly on the overlay
+  let target = e.target;
+  if (target === modalContainer) {
+    hideModal();
+  }
+});
+
+function hideModal(pokemon) {
+  let modalContainer = document.querySelector('#modal-container');
+  modalContainer.classlist.remove('is-visbile');
+}
+
+document.querySelector('#pokemon-list').addEventListener
+('click', () => {
+  showModal(pokemon);
+});
+
+window.addEventListener('keydown', (e) => {
+  let modalContainer = document.querySelector('#modal-container');
+  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    hideModal();  
+  }
+});
+
   return {
     add: add,
     getAll: getAll,
