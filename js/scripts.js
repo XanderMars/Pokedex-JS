@@ -55,10 +55,15 @@ function loadDetails(item) {
     }).then(function (details) {
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
+      item.svgUrl = details.sprites.other.dream_world.front_default;
       item.height = details.height;
-      item.types = details.types;
-    }).catch(function (e) {
-      console.error(e);
+      item.weight = details.weight;
+      let types = [];
+      details.types.forEach(item => types.push(item.type.name));
+      item.types = types;
+    }).catch(function (err) {
+      loadingMessageHidden(true);
+      console.error(err);
   });
 }
 //Shows the name of the currently clicked pokemon in Console
