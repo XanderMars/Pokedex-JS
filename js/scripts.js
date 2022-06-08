@@ -7,7 +7,7 @@ let pokemonRepository = (function () {
     if (
       typeof pokemon === "object" &&
       "name" in pokemon
-      )
+    ){
    pokemonList.push(pokemon);
     } else {
       console.log("Invalid Pokemon Entry");
