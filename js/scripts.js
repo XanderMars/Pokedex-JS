@@ -2,6 +2,7 @@ let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+//Function to add pokemon and validate the typeof
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
@@ -12,11 +13,11 @@ let pokemonRepository = (function () {
       console.log("Invalid Pokemon Entry");
     }
   }
-  
+//getAll function returns the pokemonList
   function getAll() {
     return pokemonList;
     }
-  
+// Add buttons that are assigned with data from Pokemon list
   function addListItem(pokemon) {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
@@ -46,7 +47,7 @@ function loadList() {
     console.error(e);
   })
 }
- 
+//Promise function loads the img, height and types of the pokemon
 function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -60,10 +61,10 @@ function loadDetails(item) {
       console.error(e);
   });
 }
-
+//Shows the name of the currently clicked pokemon in Console
 function showDetails(pokemon) {
   loadDetails(pokemon).then(function () {
-    console.log(pokemon);
+    showModal(pokemon);
   });
 }
   return {
@@ -71,7 +72,8 @@ function showDetails(pokemon) {
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    showModal: showModal
   };
 
     
