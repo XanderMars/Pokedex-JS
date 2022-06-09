@@ -1,6 +1,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let modalContainer = document.querySelector('#modal-container');
 
 //Function to add pokemon and validate the typeof
   function add(pokemon) {
@@ -73,11 +74,16 @@ function showDetails(pokemon) {
   });
 }
 
-function showModal(pokemon) {
-  let modalContainer = document.querySelector('#modal-container');
-  modalContainer.classlist.add('is-visbile');
-  let closeModal = document.querySelector('modal-close');
-  closeModal.addEventListener('click', hideModal);
+function showModal(title, text) {
+  //modalContainer.classlist.add('is-visbile');
+  //let closeModal = document.querySelector('modal-close');
+  //closeModal.addEventListener('click', hideModal);
+  
+  modalContainer.innerHTML = ' ';
+  
+  let modal = document.createElement('div');
+  modal.classList.add('modal');
+  
   modalContainer.addEventListener('click', (e) => {
   // Since this is also triggered when clicking INSIDE the modal
   // We only want to close if the user clicks directly on the overlay
@@ -109,15 +115,17 @@ function showModal(pokemon) {
     );
 
     // appending pokemon elements to the modal div
-    modalTitle.append(pokemonName);
-    modalBody.append(pokemonImage);
-    modalBody.append(pokemonHeight);
-    modalBody.append(pokemonWeight);
-    modalBody.append(pokemonTypes);
+    modalTitle.appendChild(pokemonName);
+    modalBody.appendChild(pokemonImage);
+    modalBody.appendChild(pokemonHeight);
+    modalBody.appendChild(pokemonWeight);
+    modalBody.appendChild(pokemonTypes);
+    
+    
+    modalContainer.classList.add('is-visible');
   })
 
 function hideModal(pokemon) {
-  let modalContainer = document.querySelector('#modal-container');
   modalContainer.classlist.remove('is-visbile');
 }
 
