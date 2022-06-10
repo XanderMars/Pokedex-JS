@@ -19,18 +19,25 @@ let pokemonRepository = (function () {
     }
 // Add buttons that are assigned with data from Pokemon list
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector(".pokemon-list");
-    let listpokemon = document.createElement("li");
-    let button = document.createElement("button");
+    let ul = document.querySelector('ul');
+    let listItem = document.createElement('li');
+    listItem.classList.add('col-sm-8');
+    let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
-    listpokemon.appendChild(button);
-    
-    pokemonList.appendChild(listpokemon);
-    button.addEventListener('click', function (event) {
+    button.addEventListener('click', (event) => {
       showDetails(pokemon);
+      event.target.blur();
     });
-  }
+      //Add classes & attributes to list item
+  button.classList.add('btn', 'btn-block', 'btn-outline-primary');
+  button.classList.add('m-1', 'bg-blue', 'text-capitalize');
+  button.setAttribute('data-toggle', 'modal');
+  button.setAttribute('data-target', '.modal');
+
+  // Add item to list
+  listItem.appendChild(button);
+  ul.appendChild(listItem);
+}
   
   //Shows the name of the currently clicked pokemon in Console
 function showDetails(pokemon) {
