@@ -32,42 +32,7 @@ let pokemonRepository = (function () {
     });
   }
   
-function loadList() {
-  return fetch(apiUrl).then(function (response) {
-    return response.json();
-  }).then(function (json) {
-    json.results.forEach(function (item) {
-      let pokemon = {
-        name: item.name,
-        detailsUrl: item.url
-      };
-      add(pokemon);
-    });
-  }).catch(function (e) {
-    console.error(e);
-  })
-}
-//Promise function loads the img, height and types of the pokemon
-function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.svgUrl = details.sprites.other.dream_world.front_default;
-      item.height = details.height;
-      item.weight = details.weight;
-      let types = [];
-      details.types.forEach(item => types.push(item.type.name));
-      item.types = types;
-    }).catch(function (e) {
-      loadingMessageHidden(true);
-      console.error(e);
-  });
-}
-  
-//Shows the name of the currently clicked pokemon in Console
+  //Shows the name of the currently clicked pokemon in Console
 function showDetails(pokemon) {
   loadDetails(pokemon).then(function () {
     showModal(pokemon);
@@ -104,16 +69,65 @@ function showDetails(pokemon) {
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypes);
   }
+  
+  function loadList() {
+  return fetch(apiUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      json.results.forEach((item) => {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url,
+        };
+        add(pokemon);
+      });
+    })
+    .catch((err) => console.log(err));
+}
+  
+function loadList() {
+  return fetch(apiUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      json.results.forEach((item) => {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url,
+        };
+        add(pokemon);
+      });
+    })
+    .catch((err) => console.log(err));
+}
+
+//Promise function loads the img, height and types of the pokemon
+function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.svgUrl = details.sprites.other.dream_world.front_default;
+      item.height = details.height;
+      item.weight = details.weight;
+      let types = [];
+      details.types.forEach(item => types.push(item.type.name));
+      item.types = types;
+    }).catch(function (e) {
+      loadingMessageHidden(true);
+      console.error(e);
+  });
+}
+  
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
+    showDetails: showDetails,
     loadList: loadList,
-    loadDetails: loadDetails,
-    showModal: showModal
+    loadDetails: loadDetails
   };
-
-    
 })();
   
 pokemonRepository.loadList().then(function() {
