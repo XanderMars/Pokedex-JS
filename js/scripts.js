@@ -88,7 +88,7 @@ function showDetails(pokemon) {
     // Create Pokemon Elements
     let pokemonName = $(`<h1>${pokemon.name}</h1>`);
     let pokemonImage = $(
-      `<img class="modal-img mx-auto" src="${pokemon.svgUrl}" alt="Drawing of Pokemon ${pokemon.name}">`
+     `<img class="modal-img mx-auto" src="${pokemon.svgUrl}" alt="Image of ${pokemon.name}">`
     );
     let pokemonHeight = $(
       `<p class="ml-4 mt-3 mb-0">Height: ${pokemon.height}</p>`
@@ -96,7 +96,6 @@ function showDetails(pokemon) {
     let pokemonWeight = $(`<p class="ml-4 mb-0">Weight: ${pokemon.weight}</p>`);
     let pokemonTypes = $(
       `<p class="ml-4">Types: ${pokemon.types.join(', ')}</p>`
-      
     );
 
     // Append Pokemon Elements
