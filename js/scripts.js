@@ -61,9 +61,9 @@ function loadDetails(item) {
       let types = [];
       details.types.forEach(item => types.push(item.type.name));
       item.types = types;
-    }).catch(function (err) {
+    }).catch(function (e) {
       loadingMessageHidden(true);
-      console.error(err);
+      console.error(e);
   });
 }
   
