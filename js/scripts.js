@@ -67,79 +67,45 @@ function loadDetails(item) {
       console.error(err);
   });
 }
+  
 //Shows the name of the currently clicked pokemon in Console
 function showDetails(pokemon) {
   loadDetails(pokemon).then(function () {
     showModal(pokemon);
   });
 }
-
-function showModal(title, text) {
-  //modalContainer.classlist.add('is-visbile');
-  //let closeModal = document.querySelector('modal-close');
-  //closeModal.addEventListener('click', hideModal);
   
-  modalContainer.innerHTML = ' ';
-  
-  let modal = document.createElement('div');
-  modal.classList.add('modal');
-  
-  modalContainer.addEventListener('click', (e) => {
-  // Since this is also triggered when clicking INSIDE the modal
-  // We only want to close if the user clicks directly on the overlay
-  let target = e.target;
-  if (target === modalContainer) {
-    hideModal();
-  }
+//Shows the name of the currently clicked pokemon in Console
+  function showModal(pokemon) {
+    // Get Node Elements
+    let modalBody = $('.modal-body');
+    let modalTitle = $('.modal-title');
 
-    //Assigning modal variables
-    let modalTitle = $(".modal-title");
-    let modalBody = $(".modal-body");
-
-    // Clear all existing modal content
+    // Clear previous content
     modalTitle.empty();
     modalBody.empty();
 
-    // Creating pokemon elements
+    // Create Pokemon Elements
     let pokemonName = $(`<h1>${pokemon.name}</h1>`);
     let pokemonImage = $(
-      `<img class="modal-img mx-auto" src="${pokemon.svgUrl}" alt="Image of ${pokemon.name}">`
+      `<img class="modal-img mx-auto" src="${pokemon.svgUrl}" alt="Drawing of Pokemon ${pokemon.name}">`
     );
-
     let pokemonHeight = $(
       `<p class="ml-4 mt-3 mb-0">Height: ${pokemon.height}</p>`
     );
     let pokemonWeight = $(`<p class="ml-4 mb-0">Weight: ${pokemon.weight}</p>`);
     let pokemonTypes = $(
-      `<p class="ml-4">Types: ${pokemon.types.join(", ")}</p>`
+      `<p class="ml-4">Types: ${pokemon.types.join(', ')}</p>`
+      
     );
 
-    // appending pokemon elements to the modal div
-    modalTitle.appendChild(pokemonName);
-    modalBody.appendChild(pokemonImage);
-    modalBody.appendChild(pokemonHeight);
-    modalBody.appendChild(pokemonWeight);
-    modalBody.appendChild(pokemonTypes);
-    
-    
-    modalContainer.classList.add('is-visible');
-  })
-
-function hideModal(pokemon) {
-  modalContainer.classlist.remove('is-visbile');
-}
-
-document.querySelector('#pokemon-list').addEventListener
-('click', () => {
-  showModal(pokemon);
-});
-
-window.addEventListener('keydown', (e) => {
-  let modalContainer = document.querySelector('#modal-container');
-  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-    hideModal();  
+    // Append Pokemon Elements
+    modalTitle.append(pokemonName);
+    modalBody.append(pokemonImage);
+    modalBody.append(pokemonHeight);
+    modalBody.append(pokemonWeight);
+    modalBody.append(pokemonTypes);
   }
-
   return {
     add: add,
     getAll: getAll,
