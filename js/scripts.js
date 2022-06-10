@@ -84,21 +84,6 @@ function showDetails(pokemon) {
     })
     .catch((err) => console.log(err));
 }
-  
-function loadList() {
-  return fetch(apiUrl)
-    .then((response) => response.json())
-    .then((json) => {
-      json.results.forEach((item) => {
-        let pokemon = {
-          name: item.name,
-          detailsUrl: item.url,
-        };
-        add(pokemon);
-      });
-    })
-    .catch((err) => console.log(err));
-}
 
 //Promise function loads the img, height and types of the pokemon
 function loadDetails(item) {
