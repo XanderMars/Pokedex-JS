@@ -84,26 +84,38 @@ function showDetails(pokemon) {
     })
     .catch((err) => console.log(err));
 }
+  
+function filterList() {
+  let inputValue = $('input').val();
+  let list = $('li');
+  list.each(function () {
+    let item = $(this);
+    let name = item.text();
+    if (name.startsWith(inputValue)) {
+      item.show();
+    } else {
+      item.hide();
+    }
+  });
+}
 
 //Promise function loads the img, height and types of the pokemon
 function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.svgUrl = details.sprites.other.dream_world.front_default;
-      item.height = details.height;
-      item.weight = details.weight;
-      let types = [];
-      details.types.forEach(item => types.push(item.type.name));
-      item.types = types;
-    }).catch(function (e) {
-      loadingMessageHidden(true);
-      console.error(e);
-  });
-}
+    return fetch(url)
+      .then((res) => res.json())
+      .then((details) => {
+        //add details to item
+        item.weight = details.weight;
+        item.imageUrl = details.sprites.front_default;
+        item.svgUrl = details.sprites.other.dream_world.front_default;
+        item.height = details.height;
+        let types = [];
+        details.types.forEach((item) => types.push(item.type.name));
+        item.types = types;
+      })
+      .catch((err) => console.log(err));
+  }
   
   return {
     add: add,
