@@ -1,6 +1,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let modalContainer = doucment.querySelector('#modal-container')
 
 //Function to add pokemon and validate the typeof
   function add(pokemon) {
@@ -75,6 +76,8 @@ function showDetails(pokemon) {
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypes);
+    
+   modalContainer.classlist.add('is-visible');
   }
   
   function loadList() {
