@@ -87,6 +87,7 @@ function showDetails(pokemon) {
        hideModal();
      }
    });
+  }
   
   function loadList() {
   return fetch(apiUrl)
