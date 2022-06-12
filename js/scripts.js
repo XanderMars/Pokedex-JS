@@ -1,6 +1,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let modalContainer = document.querySelector('#modal-container')
 
 //Function to add pokemon and validate the typeof
   function add(pokemon) {
@@ -19,18 +20,25 @@ let pokemonRepository = (function () {
     }
 // Add buttons that are assigned with data from Pokemon list
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector(".pokemon-list");
-    let listpokemon = document.createElement("li");
-    let button = document.createElement("button");
+    let ul = document.querySelector('ul');
+    let listItem = document.createElement('li');
+    listItem.classList.add('col-sm-8');
+    let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
-    listpokemon.appendChild(button);
-    
-    pokemonList.appendChild(listpokemon);
-    button.addEventListener('click', function (event) {
+    button.addEventListener('click', (event) => {
       showDetails(pokemon);
+      event.target.blur();
     });
-  }
+      //Add classes & attributes to list item
+  button.classList.add('btn', 'btn-block', 'btn-outline-primary');
+  button.classList.add('m-1', 'bg-blue', 'text-capitalize');
+  button.setAttribute('data-toggle', 'modal');
+  button.setAttribute('data-target', '.modal');
+
+  // Add item to list
+  listItem.appendChild(button);
+  ul.appendChild(listItem);
+}
   
   //Shows the name of the currently clicked pokemon in Console
 function showDetails(pokemon) {
@@ -68,7 +76,17 @@ function showDetails(pokemon) {
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypes);
-  }
+    
+   modalContainer.classList.add('is-visible');
+    
+   let closeButtonElement = document.querySelector('.modal-close');
+   closeButtonElement.addEventListener('click', hideModal);
+    
+   window.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+       hideModal();
+     }
+   });
   
   function loadList() {
   return fetch(apiUrl)
@@ -85,40 +103,41 @@ function showDetails(pokemon) {
     .catch((err) => console.log(err));
 }
   
-function loadList() {
-  return fetch(apiUrl)
-    .then((response) => response.json())
-    .then((json) => {
-      json.results.forEach((item) => {
-        let pokemon = {
-          name: item.name,
-          detailsUrl: item.url,
-        };
-        add(pokemon);
-      });
-    })
-    .catch((err) => console.log(err));
+function filterList() {
+  let inputValue = $('input').val();
+  let list = $('li');
+  list.each(function () {
+    let item = $(this);
+    let name = item.text();
+    if (name.startsWith(inputValue)) {
+      item.show();
+    } else {
+      item.hide();
+    }
+  });
 }
 
 //Promise function loads the img, height and types of the pokemon
 function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.svgUrl = details.sprites.other.dream_world.front_default;
-      item.height = details.height;
-      item.weight = details.weight;
-      let types = [];
-      details.types.forEach(item => types.push(item.type.name));
-      item.types = types;
-    }).catch(function (e) {
-      loadingMessageHidden(true);
-      console.error(e);
-  });
-}
+    return fetch(url)
+      .then((res) => res.json())
+      .then((details) => {
+        //add details to item
+        item.weight = details.weight;
+        item.imageUrl = details.sprites.front_default;
+        item.svgUrl = details.sprites.other.dream_world.front_default;
+        item.height = details.height;
+        let types = [];
+        details.types.forEach((item) => types.push(item.type.name));
+        item.types = types;
+      })
+      .catch((err) => console.log(err));
+  }
+  
+  function hideModal() {
+    modalContainer.classList.remove('is-visible');
+  }
   
   return {
     add: add,
