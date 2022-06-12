@@ -87,6 +87,7 @@ function showDetails(pokemon) {
        hideModal();
      }
    });
+  }
   
   function loadList() {
   return fetch(apiUrl)
@@ -147,6 +148,7 @@ function loadDetails(item) {
     loadList: loadList,
     loadDetails: loadDetails
   };
+
 })();
   
 pokemonRepository.loadList().then(function() {
