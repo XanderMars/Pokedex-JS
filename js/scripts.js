@@ -1,7 +1,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-  let modalContainer = doucment.querySelector('#modal-container')
+  let modalContainer = document.querySelector('#modal-container')
 
 //Function to add pokemon and validate the typeof
   function add(pokemon) {
@@ -77,8 +77,16 @@ function showDetails(pokemon) {
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypes);
     
-   modalContainer.classlist.add('is-visible');
-  }
+   modalContainer.classList.add('is-visible');
+    
+   let closeButtonElement = document.querySelector('.modal-close');
+   closeButtonElement.addEventListener('click', hideModal);
+    
+   window.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+       hideModal();
+     }
+   });
   
   function loadList() {
   return fetch(apiUrl)
@@ -125,6 +133,10 @@ function loadDetails(item) {
         item.types = types;
       })
       .catch((err) => console.log(err));
+  }
+  
+  function hideModal() {
+    modalContainer.classList.remove('is-visible');
   }
   
   return {
